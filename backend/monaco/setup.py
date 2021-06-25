@@ -5,9 +5,7 @@ setup_requires = [
 
 
 install_requires = [
-    'django==3.1.8',
-    'html5lib==1.1',
-    'wheel==0.36.2'
+    'django==3.1.8'
     ]
 
 
