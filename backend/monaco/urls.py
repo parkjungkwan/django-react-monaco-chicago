@@ -18,4 +18,6 @@ from django.urls import path
 from .common.views import Hello
 urlpatterns = [
     path('', Hello.as_view())
+
+
 ]
