@@ -6,6 +6,7 @@ import folium
 import json
 import warnings
 from monaco.common.models import FileDTO, Printer, Reader
+from matplotlib import font_manager, rc
 
 
 class Election_19th(Reader):
@@ -52,7 +53,10 @@ class Election_19th(Reader):
         vmin, vmax = -tmp_max, tmp_max
         mapdata = elec.pivot_table(index='y', columns='x', values=tar_dara)
         masked_mapdata = np.ma.masked_where(np.isnan(mapdata), mapdata)
-        plt.rc('font', family='NanumGothic')
+        # plt.rc('font', family='NanumGothic')
+        plt.rc('font', family=font_manager
+           .FontProperties(fname='C:/Windows/Fonts/H2GTRM.TTF')
+           .get_name())
         plt.rcParams['axes.unicode_minus'] = False
         plt.figure(figsize=(9, 11))
         plt.pcolor(masked_mapdata, vmin=vmin, vmax=vmax, cmap=campname,

@@ -98,7 +98,7 @@ class Reader(ReaderBase):
     def gmaps(self) -> object:
         return googlemaps.Client(key='')
 
-class Scraper(ScraperBase):
+class Scrapper(ScraperBase):
 
     def driver(self) -> object:
         return webdriver.Chrome('C:/Program Files/Google/Chrome/chromedriver')
