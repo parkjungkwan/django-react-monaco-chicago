@@ -21,7 +21,7 @@ from django.contrib import admin
 from django.urls import path, include
 # from django.conf.urls import url, include
 from rest_framework import routers
-# from member.views import MemberViewSet
+from member.views import Auth
 # from board import views
 router = routers.DefaultRouter()
 # router.register(r'member', views.MemberViewSet)
@@ -29,7 +29,8 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('connection', Connection.as_view()),
     path('board', include('board.urls')),
-    url(r'^member/', include('member.urls')),
+    # path('member', include('member.urls')),
+    url(r'^member', Auth.as_view()),
     # path('admin/', admin.site.urls),
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
