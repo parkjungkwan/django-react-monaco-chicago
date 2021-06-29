@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Member
 from icecream import ic
-# https://naon.me/posts/til56
 
 class MemberSerializer(serializers.Serializer):
     # pk인 id는 99퍼센트 수정 안 할 것이므로 read_only
