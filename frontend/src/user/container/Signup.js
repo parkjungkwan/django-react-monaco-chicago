@@ -9,7 +9,24 @@ const SignUp = () => {
     email: ''
   })
 
-  const {username, password, name, email} = userInfo
+  const {username, password, name, email} = `userInfo`
+
+
+
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    alert(`전송 클릭: ${JSON.stringify({...userInfo})}`)
+    const signupRequest = {...userInfo}
+    
+
+
+  }
+
+  const handleClick = e => {
+    e.preventDefault()
+    alert('취소 클릭')
+  }
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -20,15 +37,6 @@ const SignUp = () => {
 
   }
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    alert(`전송 클릭: ${JSON.stringify({...userInfo})}`)
-  }
-
-  const handleClick = e => {
-    e.preventDefault()
-    alert('취소 클릭')
-  }
 
     return (<>
     <div className="Signup">
