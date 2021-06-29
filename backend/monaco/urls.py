@@ -29,7 +29,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('connection', Connection.as_view()),
     path('board', include('board.urls')),
-    path('member', include('member.urls')),
+    url(r'^member/', include('member.urls')),
     # path('admin/', admin.site.urls),
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),

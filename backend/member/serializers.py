@@ -6,8 +6,11 @@ class MemberSerializer(serializers.Serializer):
     # pk인 id는 99퍼센트 수정 안 할 것이므로 read_only
     username = serializers.models.CharField()
     password = serializers.CharField()
-    name = serializers.TextField()
+    name = serializers.CharField()
     email = serializers.EmailField()
+    class Meta:
+        model = Member
+        fields = ['username', 'password', 'name', 'email']
 
     def create(self, validated_data):
         return Member.objects.create(**validated_data)
