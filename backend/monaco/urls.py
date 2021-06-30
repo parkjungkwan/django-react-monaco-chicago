@@ -16,10 +16,11 @@ Including another URLconf
 from common.views import Connection
 from django.urls import path, include
 from rest_framework import routers
-router = routers.DefaultRouter()
+# router = routers.DefaultRouter()
 
 urlpatterns = [
     path('connection', Connection.as_view()),
     path('board', include('board.urls')),
     path('member', include('member.urls')),
+    path('election', include('election.urls')),
 ]
