@@ -25,29 +25,6 @@ class Members(APIView):
         return Response(serializer.errors, status=400)
 
 class Member(APIView):
-    def get(self, request):
+    def get_object(self, pk):
         pass
 
-
-
-
-@csrf_exempt
-def member_list(request):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-
-        serializer = MemberSerializer()
-        if serializer.is_valid():
-
-            serializer.save()
-        return JsonResponse(serializer.data, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = MemberSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
