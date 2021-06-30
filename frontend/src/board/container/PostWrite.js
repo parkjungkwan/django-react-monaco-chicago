@@ -4,6 +4,28 @@ import { Button } from '@material-ui/core';
 
 const PostWirte = () => {
 
+    const [post, setPost] = useState({
+        title: '',
+        content: ''
+    })
+
+    const {title, content} = post
+
+    const handleClick = e => {
+        e.preventDefault()
+    }
+    const handleSubmit = e => {
+        e.preventDefault()
+        
+    }
+    const handleChange = e => {
+        const {name, value} = e.target
+        setPost({
+            ...post,
+            [name] : value
+        })
+    }
+
     return (<>
     <div className="Signup">
     <form onSubmit={handleSubmit} method="post" style={{border:"1px solid #ccc"}}>

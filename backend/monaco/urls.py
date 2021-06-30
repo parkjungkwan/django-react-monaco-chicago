@@ -22,5 +22,5 @@ urlpatterns = [
     path('connection', Connection.as_view()),
     path('board', include('board.urls')),
     path('member', include('member.urls')),
-    path('election', include('election.urls')),
+
 ]
