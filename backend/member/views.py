@@ -10,8 +10,10 @@ from icecream import ic
 @api_view(['GET', 'POST', 'DELETE'])
 @parser_classes([JSONParser])
 def members(request):
+    print('=== 여기까지는 왔다 !! ')
     if request.method == 'GET':
         all_members = MemberVO.objects.all()
+        ic(type(all_members))
         serializer = MemberSerializer(all_members, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'POST':
@@ -20,7 +22,7 @@ def members(request):
         serializer = MemberSerializer(data = new_member)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+            return JsonResponse({'result':f'Welcome, {serializer.data.get("name")}'}, status=201)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         serializer = MemberSerializer()
