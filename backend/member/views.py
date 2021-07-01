@@ -15,6 +15,8 @@ def members(request):
         all_members = MemberVO.objects.all()
         ic(type(all_members))
         serializer = MemberSerializer(all_members, many=True)
+        ic(type(serializer.data))
+        ic(serializer.data)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'POST':
         new_member = request.data['body']
