@@ -38,8 +38,7 @@ const MemberList = () => {
   useEffect(() => {
     memberList()
     .then(res => {
-        alert(typeof(JSON.stringify(res.data)))
-        console.log(res.data)
+        alert(JSON.stringify(res.data))
         setMembers(res.data)
     })
     .catch(err => {
