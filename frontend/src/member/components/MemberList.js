@@ -38,7 +38,6 @@ const MemberList = () => {
   useEffect(() => {
     memberList()
     .then(res => {
-        alert(JSON.stringify(res.data))
         setMembers(res.data)
     })
     .catch(err => {
@@ -61,12 +60,11 @@ const MemberList = () => {
           { members.length != 0
            ? members.map((member) => (
                <TableRow key={member.username}>
-               <TableCell component="th" scope="row">
-               {member.password}
-               </TableCell>
-               <TableCell align="right">{member.name}</TableCell>
-               <TableCell align="right">{member.email}</TableCell>
-           </TableRow>)
+                 <TableCell align="right">{member.username}</TableCell>
+                <TableCell component="th" scope="row">{member.password}</TableCell>
+                <TableCell align="right">{member.name}</TableCell>
+                <TableCell align="right">{member.email}</TableCell>
+            </TableRow>)
           )
           :  <TableRow>
           <TableCell component="th" scope="row" colSpan="4">
@@ -79,10 +77,7 @@ const MemberList = () => {
       </Table>
     </TableContainer>
     <div className={pageClasses.root}>
-        <Pagination count={10} />
         <Pagination count={10} color="primary" />
-        <Pagination count={10} color="secondary" />
-        <Pagination count={10} disabled />
     </div>
     </>);
 }
