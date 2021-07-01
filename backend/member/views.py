@@ -1,11 +1,12 @@
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from rest_framework.response import Response
 from rest_framework import status
 from member.models import MemberVO
 from member.serializers import MemberSerializer
 from rest_framework.decorators import api_view, parser_classes
 from icecream import ic
-
+from django.core import serializers
 
 @api_view(['GET', 'POST', 'DELETE'])
 @parser_classes([JSONParser])
@@ -13,11 +14,8 @@ def members(request):
     print('=== 여기까지는 왔다 !! ')
     if request.method == 'GET':
         all_members = MemberVO.objects.all()
-        ic(type(all_members))
-        serializer = MemberSerializer(all_members, many=True)
-        ic(type(serializer.data))
-        ic(serializer.data)
-        return JsonResponse(serializer.data, safe=False)
+        data = serializers.serialize('json', all_members)
+        return Response(data=data, status=201)
     elif request.method == 'POST':
         new_member = request.data['body']
         ic(new_member)

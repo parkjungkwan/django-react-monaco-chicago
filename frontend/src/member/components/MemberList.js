@@ -10,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Pagination from '@material-ui/lab/Pagination';
 import { memberList } from 'api'
 
+
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -36,6 +38,7 @@ const MemberList = () => {
   useEffect(() => {
     memberList()
     .then(res => {
+        alert(typeof(JSON.stringify(res.data)))
         console.log(res.data)
         setMembers(res.data)
     })
