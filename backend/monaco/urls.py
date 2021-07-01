@@ -21,9 +21,9 @@ from rest_framework import routers
 
 urlpatterns = [
     path('connection', Connection.as_view()),
-    url('^api/post', include('board.urls')),
-    url('^api/member', include('member.urls')),
-    url('^adm/member', include('member.urls')),
+    url(r'^api/member/', include('member.urls')),
+    # url('^api/post', include('board.urls')),
+    # url('^adm/member', include('member.urls')),
 
 ]
 

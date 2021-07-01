@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'nl_prcs',
     'population',
     'time_series',
-    'user',
 ]
 
 MIDDLEWARE = [
@@ -143,7 +142,6 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'user.CustomUser'
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
