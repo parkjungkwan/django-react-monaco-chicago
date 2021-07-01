@@ -59,15 +59,15 @@ const MemberList = () => {
         </TableHead>
         <TableBody>
           { members.length != 0
-           ? members.map((member) => {
+           ? members.map((member) => (
                <TableRow key={member.username}>
                <TableCell component="th" scope="row">
                {member.password}
                </TableCell>
                <TableCell align="right">{member.name}</TableCell>
                <TableCell align="right">{member.email}</TableCell>
-           </TableRow>
-          })
+           </TableRow>)
+          )
           :  <TableRow>
           <TableCell component="th" scope="row" colSpan="4">
              <h1>등록된 데이터가 없습니다</h1>
