@@ -15,7 +15,7 @@ def members(request):
         serializer = MemberSerializer(all_members, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'POST':
-        new_member = JSONParser().parse(request)
+        new_member = request.data['body']
         ic(new_member)
         serializer = MemberSerializer(data = new_member)
         if serializer.is_valid():
