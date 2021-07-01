@@ -1,3 +1,13 @@
+from member import views
+from django.conf.urls import url
+
+urlpatterns = [
+    url(r'^api/member/register', views.members),
+
+]
+
+'''
+CBV 방식 (Class Based View)
 from django.conf.urls import url
 from .views import Members as members
 from .views import Member as member
@@ -6,3 +16,5 @@ urlpatterns = [
     url('/register', members.as_view()),
     path('/<int:pk>/', member.as_view()),
 ]
+'''
+

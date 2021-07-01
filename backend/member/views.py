@@ -1,54 +1,40 @@
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
 from rest_framework import status
+from member.models import MemberVO
 from member.serializers import MemberSerializer
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .models import MemberVO
+from rest_framework.decorators import api_view, parser_classes
 from icecream import ic
-from django.http import Http404
 
 
-class Members(APIView):
-
-    def get(self, request):
-        members = MemberVO.objects.all()
-        serializer = MemberSerializer(members, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        data = request.data['body']
-        ic(data)
-        serializer = MemberSerializer(data=data)
+@api_view(['GET', 'POST', 'DELETE'])
+@parser_classes([JSONParser])
+def members(request):
+    if request.method == 'GET':
+        all_members = MemberVO.objects.all()
+        serializer = MemberSerializer(all_members, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        new_member = JSONParser().parse(request)
+        ic(new_member)
+        serializer = MemberSerializer(data = new_member)
         if serializer.is_valid():
             serializer.save()
-            return Response({'result':f'Welcome, {serializer.data.get("name")}'}, status=201)
-        ic(serializer.errors)
-        return Response(serializer.errors, status=400)
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        serializer = MemberSerializer()
+        return JsonResponse(serializer.data, safe=False)
 
-
-class Member(APIView):
-
-    def get_object(self, pk):
-        ic(self.pk)
-        try:
-            return MemberVO.objects.get(pk=pk)
-        except MemberVO.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk):
-        member = self.get_object(pk)
-        serializer = MemberSerializer(member)
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        member = self.get_object(pk)
-        serializer = MemberSerializer(member, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk):
-        member = self.get_object(pk)
-        member.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+@api_view(['GET', 'PUT', 'DELETE'])
+def member(request, pk):
+    if request.method == 'GET':
+        serializer = MemberSerializer()
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'PUT':
+        serializer = MemberSerializer()
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'DELETE':
+        serializer = MemberSerializer()
+        return JsonResponse(serializer.data, safe=False)
 

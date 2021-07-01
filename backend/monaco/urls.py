@@ -14,6 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from common.views import Connection
+from django.conf.urls import include, url
+from django.urls import path
+from rest_framework import routers
+# router = routers.DefaultRouter()
+
+urlpatterns = [
+    path('connection', Connection.as_view()),
+    url('^api/post', include('board.urls')),
+    url('^api/member', include('member.urls')),
+    url('^adm/member', include('member.urls')),
+
+]
+
+'''
+CBV (Class Based View)
+from common.views import Connection
 from django.urls import path, include
 from rest_framework import routers
 # router = routers.DefaultRouter()
@@ -24,3 +40,5 @@ urlpatterns = [
     path('member', include('member.urls')),
 
 ]
+'''
+
