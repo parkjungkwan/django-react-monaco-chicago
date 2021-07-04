@@ -28,7 +28,7 @@ const usePageStyles = makeStyles((theme) => ({
 
 
 
-const MemberList = () => {
+const MemberListComponent = () => {
   
   const [members, setMembers] = useState([])
 
@@ -82,7 +82,7 @@ const MemberList = () => {
     </>);
 }
 
-export default MemberList
+export default MemberListComponent
 
 /*
  <TableRow key={row.name}>

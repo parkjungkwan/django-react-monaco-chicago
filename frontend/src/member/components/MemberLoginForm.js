@@ -1,14 +1,14 @@
 import React,{useState} from 'react'
 import '../styles/MemberLogin.css'
 
-const MemberLogin = () => {
+const MemberLoginForm = () => {
     return (<>
-    <h2>Login Form</h2>
+      <h2>Login Form</h2>
 
       <form action="/action_page.php" method="post">
-        <div className="imgcontainer">
-          <img src="https://www.w3schools.com/howto/img_avatar2.png" style={{width: "300px"}} alt="Avatar" className="avatar"/>
-        </div>
+          <div className="imgcontainer">
+            <img src="https://www.w3schools.com/howto/img_avatar2.png" style={{width: "300px"}} alt="Avatar" className="avatar"/>
+          </div>
 
         <div className="container">
           <label labelFor="uname"><b>Username</b></label>
@@ -32,4 +32,4 @@ const MemberLogin = () => {
     </>)
 }
 
-export default MemberLogin
+export default MemberLoginForm

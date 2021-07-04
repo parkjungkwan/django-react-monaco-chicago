@@ -3,7 +3,7 @@ import '../styles/MemberRegister.css'
 import { memberRegister } from 'api'
 import { useHistory } from 'react-router'
 
-const MemberRegister = () => {
+const MemberRegisterForm = () => {
   const history = useHistory()
   const [memberInfo, setMemberInfo] = useState({
     username: '',
@@ -81,4 +81,4 @@ const MemberRegister = () => {
 </>)
 }
 
-export default MemberRegister
+export default MemberRegisterForm

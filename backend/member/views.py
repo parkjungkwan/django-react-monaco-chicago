@@ -11,7 +11,6 @@ from icecream import ic
 @api_view(['GET', 'POST', 'DELETE'])
 @parser_classes([JSONParser])
 def members(request):
-    print('=== 여기까지는 왔다 !! ')
     if request.method == 'GET':
         all_members = MemberVO.objects.all()
         serializer = MemberSerializer(all_members, many=True)

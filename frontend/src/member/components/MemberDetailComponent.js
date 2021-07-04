@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import '../styles/MemberDetail.css'
 
-const MemberDetail = () => {
+const MemberDetailComponent = () => {
     return (<>
  
         
@@ -17,4 +17,4 @@ const MemberDetail = () => {
       </>)
 }
 
-export default MemberDetail
+export default MemberDetailComponent
