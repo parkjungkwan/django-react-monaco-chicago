@@ -30,6 +30,8 @@ def members(request):
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def member(request):
+
+
     if request.method == 'GET':
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
@@ -59,8 +61,19 @@ def member(request):
 
         return HttpResponse(status=104)
     elif request.method == 'PUT':
-        serializer = MemberSerializer()
-        return JsonResponse(serializer.data, safe=False)
+        print('----------- put 1-------------')
+        data = request.data['body']
+        update_member = data['member']
+        ic(update_member)
+        pk = update_member['username']
+        member = MemberVO.objects.get(pk=pk)
+        user_change_password = update_member['password']
+        ic(user_change_password)
+        serializer = MemberSerializer(member, data = data['member'], partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'result':f'Update Success , {serializer.data.get("name")}'}, status=201)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
