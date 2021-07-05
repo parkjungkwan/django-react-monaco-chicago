@@ -6,6 +6,7 @@ from member.models import MemberVO
 from member.serializers import MemberSerializer
 from rest_framework.decorators import api_view, parser_classes
 from icecream import ic
+import json
 
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -36,15 +37,21 @@ def member(request):
         data = request.data['body']
         pk = data['username']
         user_input_password = data['password']
+        print(f'----------- ok 아이디 :  ------------- {pk}')
+        print(f'----------- ok 비밀번호 :  ------------- {user_input_password}')
         member = MemberVO.objects.get(pk=pk)
         # member = self.get_object(pk)
-        if(member is not None):
+        try:
             ic(member)
+            print('----------- ok 1-------------')
             if user_input_password == member.password:
-                return JsonResponse({'result': member}, status=201)
-        else:
+                print('----------- ok 2-------------')
+                return Response({'result': 'SUCCESS'}, status=201)
+        except member.DoesNotExist:
             print('해당 아이디가 없음')
             JsonResponse({'result': "FAIL"}, status=201)
+
+        print('----------- ok 3-------------')
         return HttpResponse(status=104)
     elif request.method == 'PUT':
         serializer = MemberSerializer()
