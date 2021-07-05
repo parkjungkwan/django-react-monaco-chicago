@@ -28,7 +28,7 @@ const usePageStyles = makeStyles((theme) => ({
 
 
 
-const MemberListComponent = ({ match }) => {
+const MemberListComponent = () => {
   
   const [members, setMembers] = useState([])
 

@@ -4,7 +4,6 @@ import 'member/styles/MemberDetail.css'
 const MemberDetailComponent = () => {
     const [member, setMember] = useState({})
 
-
     useEffect(() => {
       setMember(JSON.parse(localStorage.getItem("selectedMember")))
     }, {})
@@ -24,8 +23,6 @@ const MemberDetailComponent = () => {
                     </div>
                     <p><button className="member-detail-button">Contact</button></p>
                 </div>
-                 
-       
       </>)
 }
 

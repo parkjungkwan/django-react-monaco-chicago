@@ -1,5 +1,5 @@
 from rest_framework.parsers import JSONParser
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, HttpResponse, Http404
 from rest_framework.response import Response
 from rest_framework import status
 from member.models import MemberVO
@@ -27,11 +27,21 @@ def members(request):
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def member(request, pk):
     if request.method == 'GET':
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = request.data['body']
+        pk = data['username']
+        user_input_password = data['password']
+        member = MemberVO.objects.get(pk=pk)
+        # member = self.get_object(pk)
+        ic(member)
+        if user_input_password == member.password:
+            return Response({'result': 'you are logged in'}, status=201)
+        return HttpResponse(status=104)
     elif request.method == 'PUT':
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
@@ -39,8 +49,5 @@ def member(request, pk):
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
 
-@api_view(['POST'])
-def login(request):
-    serializer = MemberSerializer()
-    return JsonResponse(serializer.data, safe=False)
+
 
