@@ -11,8 +11,8 @@ const App = () => {
     <Router>
    
         <Route exact path='/home' component={Home}/>
+        <Route exact path='/member-logout' component={Home}/>
         <Redirect exact from={'/'} to={'/home'}/>
-        <Redirect exact from={'/member-logout'} to={'/home'}/>
         <Route exact path='/member' component={Member}/>
         <Route exact path='/member-detail/:id' component={MemberDetail}/>
         <Route exact path='/member-list' component={MemberList}/>

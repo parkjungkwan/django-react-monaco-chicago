@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-export const MemberMenu = () => ( <nav>
+import { useHistory } from 'react-router'
+export const MemberMenu = () => { 
+    
+    const history = useHistory()
+    
+    return ( <nav>
        
             
             {
@@ -17,15 +21,20 @@ export const MemberMenu = () => ( <nav>
                     <li><Link to='/member-detail'>회원상세</Link></li>
                     <li><Link to='/member-modify'>회원수정</Link></li>
                     <li><Link to='/member-delete'>회원탈퇴</Link></li>
-                    <li><Link to='/member-logout' onClick={() => localStorage.setItem("loginedMember","")}>로그아웃</Link></li>
+                    <li><Link to='/member-logout' onClick={() => {
+                        localStorage.setItem("loginedMember","")
+                        alert('2')
+                        history.push("/home")
+                        alert('2')
+                        
+                        }}>로그아웃</Link></li>
                 </ol>
             }
             
        
         </nav>
-
-        )
-
+)   
+    }
 export const ItemMenu = () => (<nav>
     <ol>
         <li><Link to='/item-list'>아이템목록</Link></li>
