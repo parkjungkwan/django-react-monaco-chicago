@@ -18,7 +18,7 @@ const MemberLoginForm = () => {
     alert(`전송 클릭: ${JSON.stringify({...loginRequest})}`)
     memberLogin({...loginRequest})
     .then(res => {
-      alert(`로그인 완료 : ${res.data.result} `)
+      alert(`로그인 완료 : ${JSON.stringify(res.data)} `)
       history.push()
     
     })

@@ -46,7 +46,9 @@ def member(request):
             print('----------- ok 1-------------')
             if user_input_password == member.password:
                 print('----------- ok 2-------------')
-                return Response({'result': 'SUCCESS'}, status=201)
+                serializer = MemberSerializer(member, many=False)
+                return JsonResponse(data=serializer.data, safe=False)
+                # return JsonResponse({'result': json.dump(member)}, status=201)
         except member.DoesNotExist:
             print('해당 아이디가 없음')
             JsonResponse({'result': "FAIL"}, status=201)
