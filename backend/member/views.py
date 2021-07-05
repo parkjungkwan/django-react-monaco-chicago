@@ -1,12 +1,10 @@
 from rest_framework.parsers import JSONParser
-from django.http.response import JsonResponse, HttpResponse, Http404
-from rest_framework.response import Response
+from django.http.response import JsonResponse, HttpResponse
 from rest_framework import status
 from member.models import MemberVO
 from member.serializers import MemberSerializer
 from rest_framework.decorators import api_view, parser_classes
 from icecream import ic
-import json
 
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -30,8 +28,6 @@ def members(request):
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def member(request):
-
-
     if request.method == 'GET':
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
@@ -39,18 +35,13 @@ def member(request):
         data = request.data['body']
         pk = data['username']
         user_input_password = data['password']
-        print(f'----------- ok 아이디 :  ------------- {pk}')
-        print(f'----------- ok 비밀번호 :  ------------- {user_input_password}')
         member = MemberVO.objects.get(pk=pk)
         if member is not None:
             ic(member)
-            print('----------- ok 1-------------')
             if user_input_password == member.password:
-                print('----------- ok 2-------------')
                 serializer = MemberSerializer(member, many=False)
                 ic(type(serializer.data))
                 return JsonResponse(data=serializer.data, safe=False)
-                # return JsonResponse({'result': json.dump(member)}, status=201)
             else:
                 print('비밀번호가 다릅니다.')
                 return JsonResponse(data=["FAIL"], safe=False)
@@ -61,7 +52,6 @@ def member(request):
 
         return HttpResponse(status=104)
     elif request.method == 'PUT':
-        print('----------- put 1-------------')
         data = request.data['body']
         update_member = data['member']
         ic(update_member)

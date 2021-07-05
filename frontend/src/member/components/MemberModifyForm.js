@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import 'member/styles/MemberDetail.css'
 import { memberModify } from 'api'
 const MemberModifyForm = () => {
-    const [changedPassword, setChangedPassword] = useState({})
+    const [changedPassword, setChangedPassword] = useState('')
 
 
     const handleSubmit = e => {

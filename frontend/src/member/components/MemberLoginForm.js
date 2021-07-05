@@ -15,7 +15,6 @@ const MemberLoginForm = () => {
     
   const handleSubmit = e => {
     e.preventDefault()
-    alert(`전송 클릭: ${JSON.stringify({...loginRequest})}`)
     memberLogin({...loginRequest})
     .then(res => {
       if(JSON.stringify(res.data[0]) === 'FAIL'){
