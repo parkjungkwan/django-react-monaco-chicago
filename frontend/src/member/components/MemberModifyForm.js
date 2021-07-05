@@ -15,6 +15,7 @@ const MemberModifyForm = () => {
       memberModify({member})
       .then(res => {
         alert(`비밀번호 수정 완료 : ${res.data.result} `)
+        localStorage.setItem("loginedMember", res.data.result)
         // history.push('login')
         
       })

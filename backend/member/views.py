@@ -44,11 +44,10 @@ def member(request):
                 return JsonResponse(data=serializer.data, safe=False)
             else:
                 print('비밀번호가 다릅니다.')
-                return JsonResponse(data=["FAIL"], safe=False)
-
+                return JsonResponse({'result':'PASSWORD-FAIL'}, status=201)
         else:
             print('해당 아이디가 없음')
-            return JsonResponse(data=["FAIL"], safe=False)
+            return JsonResponse({'result':'USERNAME-FAIL'}, status=201)
 
         return HttpResponse(status=104)
     elif request.method == 'PUT':
@@ -65,6 +64,10 @@ def member(request):
             return JsonResponse({'result':f'Update Success , {serializer.data.get("name")}'}, status=201)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
-        serializer = MemberSerializer()
-        return JsonResponse(serializer.data, safe=False)
+        data = request.data['body']
+        pk = data['username']
+        user_input_password = data['password']
+        member = MemberVO.objects.get(pk=pk)
+        member.delete()
+        return JsonResponse({'result':f'SUCCESS'}, status=201)
 
