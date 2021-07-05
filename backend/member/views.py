@@ -28,7 +28,7 @@ def members(request):
         return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
-def member(request, pk):
+def member(request):
     if request.method == 'GET':
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
@@ -38,9 +38,13 @@ def member(request, pk):
         user_input_password = data['password']
         member = MemberVO.objects.get(pk=pk)
         # member = self.get_object(pk)
-        ic(member)
-        if user_input_password == member.password:
-            return Response({'result': 'you are logged in'}, status=201)
+        if(member is not None):
+            ic(member)
+            if user_input_password == member.password:
+                return JsonResponse({'result': member}, status=201)
+        else:
+            print('해당 아이디가 없음')
+            JsonResponse({'result': "FAIL"}, status=201)
         return HttpResponse(status=104)
     elif request.method == 'PUT':
         serializer = MemberSerializer()
@@ -48,6 +52,4 @@ def member(request, pk):
     elif request.method == 'DELETE':
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
-
-
 
