@@ -40,20 +40,23 @@ def member(request):
         print(f'----------- ok 아이디 :  ------------- {pk}')
         print(f'----------- ok 비밀번호 :  ------------- {user_input_password}')
         member = MemberVO.objects.get(pk=pk)
-        # member = self.get_object(pk)
-        try:
+        if member is not None:
             ic(member)
             print('----------- ok 1-------------')
             if user_input_password == member.password:
                 print('----------- ok 2-------------')
                 serializer = MemberSerializer(member, many=False)
+                ic(type(serializer.data))
                 return JsonResponse(data=serializer.data, safe=False)
                 # return JsonResponse({'result': json.dump(member)}, status=201)
-        except member.DoesNotExist:
-            print('해당 아이디가 없음')
-            JsonResponse({'result': "FAIL"}, status=201)
+            else:
+                print('비밀번호가 다릅니다.')
+                return JsonResponse(data=["FAIL"], safe=False)
 
-        print('----------- ok 3-------------')
+        else:
+            print('해당 아이디가 없음')
+            return JsonResponse(data=["FAIL"], safe=False)
+
         return HttpResponse(status=104)
     elif request.method == 'PUT':
         serializer = MemberSerializer()
