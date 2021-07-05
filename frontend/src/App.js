@@ -12,10 +12,11 @@ const App = () => {
    
         <Route exact path='/home' component={Home}/>
         <Redirect exact from={'/'} to={'/home'}/>
+        <Redirect exact from={'/member-logout'} to={'/home'}/>
         <Route exact path='/member' component={Member}/>
-        <Route exact path='/member-detail' component={MemberDetail}/>
+        <Route exact path='/member-detail/:id' component={MemberDetail}/>
         <Route exact path='/member-list' component={MemberList}/>
-        <Route exact path='/member-login' component={MemberLogin}/>
+        <Route exact path='/member-login' component={MemberLogin}/>        
         <Route exact path='/member-modify' component={MemberModify}/>
         <Route exact path='/member-register' component={MemberRegister}/>
         <Route exact path='/item' component={Item}/>

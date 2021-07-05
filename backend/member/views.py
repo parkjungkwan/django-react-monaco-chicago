@@ -39,3 +39,8 @@ def member(request, pk):
         serializer = MemberSerializer()
         return JsonResponse(serializer.data, safe=False)
 
+@api_view(['POST'])
+def login(request):
+    serializer = MemberSerializer()
+    return JsonResponse(serializer.data, safe=False)
+
