@@ -36,7 +36,7 @@ def member(request, pk):
         else:
             print('member is None')
     except MemberVO.DoesNotExist :
-        return JsonResponse({'result': 'USERNAME-FAIL'}, status=201)
+        return JsonResponse({'result': 'MEMBER-NOT-EXISTS'}, status=201)
 
     if request.method == 'GET':
         serializer = MemberSerializer()

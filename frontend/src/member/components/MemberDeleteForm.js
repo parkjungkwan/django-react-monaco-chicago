@@ -6,8 +6,6 @@ import { useHistory } from 'react-router'
 const MemberDeleteForm = () => {
     const [deletedPassword, setDeletedPassword] = useState('')
     const history = useHistory()
-
-
     const handleSubmit = e => {
       e.preventDefault()
       const member = JSON.parse(localStorage.getItem("loginedMember"))
@@ -32,20 +30,14 @@ const MemberDeleteForm = () => {
 
     return (<>
     <form method="delete" onSubmit={handleSubmit} >
-            
-                <h2 style={{"text-align":"center"}}>회원탈퇴</h2>
-        <div className="container">
+          <h2 style={{"text-align":"center"}}>회원탈퇴</h2>
+          <div className="container">
           <label labelFor="password"><b>비밀번호 </b></label>
           <input type="password" id="password" placeholder="Enter Password" onChange={e => {setDeletedPassword(e.target.value)}} name="password" required/>
-              
           <button type="submit">확 인</button>
-         
         </div>
-
       </form>
-      
-       
-      </>)
+    </>)
 }
 
 export default MemberDeleteForm
